@@ -16,6 +16,10 @@ BIRD_FRAME_COUNT = 14
 BIRD_FRAME_W = 183
 BIRD_FRAME_H = 168
 
+BIRD_HEIGHT_M = 0.5
+BIRD_HEIGHT_PX = BIRD_HEIGHT_M * PIXEL_PER_METER
+BIRD_WIDTH_PX = BIRD_HEIGHT_PX * BIRD_FRAME_W / BIRD_FRAME_H
+
 FLIP_MARGIN = 100
 
 
@@ -41,8 +45,9 @@ class Bird:
         sy = (frame // 5) * BIRD_FRAME_H
         if self.dir == 1:
             self.image.clip_draw(
-                sx, sy, BIRD_FRAME_W, BIRD_FRAME_H, self.x, self.y)
+                sx, sy, BIRD_FRAME_W, BIRD_FRAME_H,
+                self.x, self.y, BIRD_WIDTH_PX, BIRD_HEIGHT_PX)
         else:
             self.image.clip_composite_draw(
                 sx, sy, BIRD_FRAME_W, BIRD_FRAME_H,
-                0, 'h', self.x, self.y, BIRD_FRAME_W, BIRD_FRAME_H)
+                0, 'h', self.x, self.y, BIRD_WIDTH_PX, BIRD_HEIGHT_PX)
